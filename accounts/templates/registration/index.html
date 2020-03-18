@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+
+<span>Hello,{{request.user}}</span>
+<span><a href="{% url 'logout' %}">Logout</a></span>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css"
+        integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="assets/paper.css">
+    <link rel="stylesheet" href="assets/styles.css">
+
+
+    <title>Branch Information Report</title>
+
+    <style>
+        @page {
+            size: A4 landscape;
+            background-color: #EBEAF4;
+        }
+
+        @media print {
+
+            .no-print,
+            .no-print * {
+                display: none !important;
+            }
+        }
+
+        .table td,
+        .table th {
+            padding: 0.25rem;
+            font-size: 13px;
+            /* background: #EBEAF4; */
+        }
+
+        .table thead {
+            background-color: rgb(165, 192, 223);
+        }
+
+        .table thead.table-style-2 {
+            background-color: #D7A398;
+        }
+
+        @media print {
+
+            .table td,
+            .table th {
+                background-color: #EBEAF4 !important;
+            }
+
+            tr:nth-child(odd) td {
+                background-color: #dee2e6 !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            tr:nth-child(odd) th {
+                background-color: #dee2e6 !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .table thead th {
+                background-color: rgb(165, 192, 223) !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .table thead.table-style-2 th{
+            background-color: #D7A398 !important;
+            -webkit-print-color-adjust: exact;
+        }
+        }
+    </style>
+</head>
+
+<body style="background-color: #EBEAF4;">
+
+    <section class="sheet">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 my-2">
+                    <a href="#" class="navbar-brand">
+                        <img src="assets/icici-logo.png" alt="" width="45%">
+                    </a>
+                </div>
+                <div class="col-md-6  my-auto text-right">
+                    <span class="navbar-text">
+                        Branch Information Report
+                    </span>
+                </div>
+
+                <div class="col-md-4 text-left text-white pt-2 bar-info">
+                    <h5>XYZ Branch</h5>
+                </div>
+                <div class="col-md-4 text-center text-white pt-2 bar-info">
+                    <h5>Valid till XXXX</h5>
+                </div>
+                <div class="col-md-4 text-right text-white pt-2 bar-info">
+                    <h5>02-12-2019</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-3 mt-3 border-right">
+
+                    <div id="c_chart1" class="tiles-grid" style="height: auto; width: 75%;">
+                        <div data-role="tile" data-size="large">
+                            <canvas id="c_chart" width="50" height="30"></canvas>
+                        </div>
+                    </div>
+                    <div id="te_chart1" class="tiles-grid text-center pt-2" style="height: auto; width: 75%;">
+                        <div data-role="tile" data-size="large">
+                            <canvas id="te_chart" class="text-center" width="50" height="30"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-3 mt-3 border-right">
+
+                    <div id="s_chart1" class="tiles-grid" style="height: auto; width: 75%;">
+                        <div data-role="tile" data-size="large">
+                            <canvas id="s_chart" width="50" height="30"></canvas>
+                        </div>
+                    </div>
+                    <div id="tot_chart1" class="tiles-grid pt-2" style="height: auto; width: 75%;">
+                        <div data-role="tile" data-size="large">
+                            <canvas id="tot_chart" width="50" height="30"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 my-auto border-right">
+                    <h6 class="text-center p-4 mt-4 border border-dark rounded" id="val-1-main">
+                        Advances Current Position<br>
+                        <span id="item-value-1">355</span><i class="fas" id="arrow-val1"></i>
+                    </h6>
+                    <h6 class="text-center p-4  border border-dark rounded" id="val-2-main">
+                        As on 31st March 2019<br>
+                        <span id="item-value-2">22467</span><i class="fas" id="arrow-val2"></i>
+                    </h6>
+                    <h6 class="text-center p-4  border border-dark rounded" id="val-3-main">
+                        Current Position<br>
+                        <span id="item-value-3">111134</span><i class="fas" id="arrow-val3"></i>
+                    </h6>
+                </div>
+                <div class="col-md-3 my-auto">
+
+
+                    <div id="dis_chart1" class="tiles-grid mx-auto" style="height: auto; width: 100%;">
+                        <div data-role="tile" class="mx-auto" data-size="large">
+                            <canvas id="dis_chart" width="100%"></canvas>
+                        </div>
+
+                        <p class="text-center pt-2">
+                            Target for the Year
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3 my-auto">
+                    <div style="width: 85%; height: 200px;">
+                        <canvas id="canvas"></canvas>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mt-5 my-auto">
+
+
+                    <div id="dbt_chart1" class="tiles-grid" style="height: auto; width: 90%;">
+                        <div data-role="tile" data-size="large">
+                            <canvas id="dbt_chart" width="50" height="30"></canvas>
+                        </div>
+                        <p class="text-center pt-2">
+                            (Total)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mt-5 my-auto">
+
+
+                    <div id="crt_chart1" class="tiles-grid" style="height: auto; width: 90%;">
+                        <div data-role="tile" data-size="large">
+                            <canvas id="crt_chart" width="50" height="30"></canvas>
+                        </div>
+                        <p class="text-center pt-2">
+                            (Total)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mt-5">
+                    <h5>
+                        Top 5 Customers
+                    </h5>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Customer</th>
+                                <th scope="col">Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>100Cr</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>90Cr</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>50Cr</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>Larry</td>
+                                <td>50Cr</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>Larry</td>
+                                <td>50Cr</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <br class="no-print">
+
+    <section class="sheet">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 my-2">
+                    <a href="#" class="navbar-brand">
+                        <img src="assets/icici-logo.png" alt="" width="45%">
+                    </a>
+                </div>
+                <div class="col-md-6  my-auto text-right">
+                    <span class="navbar-text">
+                        Branch Information Report
+                    </span>
+                </div>
+
+                <div class="col-md-4 text-left text-white pt-2 bar-info">
+                    <h5>XYZ Branch</h5>
+                </div>
+                <div class="col-md-4 text-center text-white pt-2 bar-info">
+                    <h5>Valid till XXXX</h5>
+                </div>
+                <div class="col-md-4 text-right text-white pt-2 bar-info">
+                    <h5>02-12-2019</h5>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-center text-dark pt-2">
+                    <h5>JFM Dashboard</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row" style="height: 75mm;">
+
+                <div class="col-md-4 mt-3 my-auto">
+
+                    <div id="c_chart1" class="tiles-grid " style="height: auto; width: 75%;">
+                        <div data-role="tile" data-size="large">
+                            <canvas id="c_chart-1"></canvas>
+                        </div>
+
+
+                    </div>
+                    <br>
+
+
+                </div>
+                <div class="col-md-3 mt-3 my-auto">
+
+                    <div id="s_chart1" class="tiles-grid mx-auto" style="height: auto; width: 100%;">
+                        <div data-role="tile" data-size="large">
+                            <canvas id="pie-chart"></canvas>
+                        </div>
+
+
+                    </div>
+                    <br>
+
+                </div>
+                <div class="col-md-5 mt-3 my-auto">
+
+                    <div id="s_chart1" class="tiles-grid mx-auto" style="height: auto; width: 60%;">
+                        <div data-role="tile" data-size="large">
+                            <canvas id="stacked-chart"></canvas>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 my-auto">
+                    <h6 class="text-center p-4 mt-4 border border-dark rounded" id="val-4-main">
+                        Advances Current Position<br>
+                        <span id="item-value-4">355</span><i class="fas" id="arrow-val4"></i>
+                    </h6>
+                    <h6 class="text-center p-4  border border-dark rounded" id="val-5-main">
+                        As on 31st March 2019<br>
+                        <span id="item-value-5">22467</span><i class="fas" id="arrow-val5"></i>
+                    </h6>
+                    <h6 class="text-center p-4  border border-dark rounded" id="val-6-main">
+                        Current Position<br>
+                        <span id="item-value-6">111134</span><i class="fas" id="arrow-val6"></i>
+                    </h6>
+                </div>
+
+                <div class="col-md-4 mt-3">
+                    <h5>
+                        Top 5 Customers
+                    </h5>
+
+                    <table class="table table-striped">
+                        <thead class="table-style-2">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Customer</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Total Amount</th>
+                            </tr>
+                        </thead class="table-style-2">
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>90Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>50Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>Larry</td>
+                                <td>50Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>Larry</td>
+                                <td>50Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-md-4 mt-3">
+                    <h5>
+                        Top 5 Customers
+                    </h5>
+
+                    <table class="table table-striped">
+                        <thead class="table-style-2">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Customer</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>90Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>50Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>Larry</td>
+                                <td>50Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>Larry</td>
+                                <td>50Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                                <td>100Cr</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12 mt-3 mb-3"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="mt-5 mb-5 no-print">
+    </section>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
+        integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+    <script src="assets/scripts.js"></script>
+
+
+</body>
+
+</html>
