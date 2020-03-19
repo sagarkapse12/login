@@ -1,0 +1,83 @@
+.navbar {
+    padding: 1.5rem 1rem;
+}
+
+.navbar-text {
+    color: #234B90;
+    font-size: x-large;
+    font-weight: 700;
+}
+
+.bar-info {
+    background: #234B90;
+}
+
+.project-heading {
+    color: #234B90;
+}
+
+h4 {
+    color: #234B90;
+}
+
+.box-red {
+    background: rgba(35, 75, 144, 0.075);
+    border: 1.5px solid #234B90;
+}
+
+.box-red-text {
+    color: #234B90;
+    padding: 15px 20px;
+    font-size: large;
+    font-weight: 500;
+    margin: 0px;
+}
+
+.dload-button {
+    position: relative;
+    top: -150px;
+    left: 91%;
+}
+
+.dload-button-bottom {
+    background-color: rgb(248, 248, 248);
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+.dload-button-bottom:hover {
+    background-color: #3456D1;
+}
+
+
+.btn-x {
+    color: #fff;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+}
+
+.btn-x:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.dload-float {
+    background-color: #234B90;
+    padding: 20px;
+    position: fixed;
+    right: -143px;
+    top: 185px;
+}
+
+.dload-float:hover {
+    background-color: #234B90;
+    padding: 20px;
+    position: fixed;
+    right: 0;
+    top: 185px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
