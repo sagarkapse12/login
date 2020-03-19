@@ -1,12 +1,10 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
-
-
-<head>
-
+{% include "registration/icici-logo.svg" %}
 <span>Hello,{{request.user}}</span>
 <span><a href="{% url 'logout' %}">Logout</a></span>
-
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,8 +14,9 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css"
         integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="assets/paper.css">
-    <link rel="stylesheet" href="assets/styles.css">
+
+    <link rel="stylesheet" href="{% static '/css/paper.css' %}">
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
 
 
     <title>Branch Information Report</title>
@@ -88,7 +87,7 @@
             <div class="row">
                 <div class="col-md-6 my-2">
                     <a href="#" class="navbar-brand">
-                        <img src="assets/icici-logo.png" alt="" width="45%">
+                        <img src="{% static 'images/icici-logo.png' %}" alt="" width="45%">
                     </a>
                 </div>
                 <div class="col-md-6  my-auto text-right">
@@ -356,7 +355,7 @@
                                 <th scope="col">Total Amount</th>
                                 <th scope="col">Total Amount</th>
                             </tr>
-                        </thead class="table-style-2">
+                        </thead>
                         <tbody>
                             <tr>
                                 <th scope="row">1</th>
@@ -486,7 +485,7 @@
         integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
-    <script src="assets/scripts.js"></script>
+    <script src="{% static 'js/scripts.js' %}" type=text/javascripts"></script>
 
 
 </body>
